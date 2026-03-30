@@ -66,6 +66,19 @@ describe("Homepage layout", () => {
     });
   });
 
+  it("displays the decommission warning banner", async () => {
+    const { getByRole } = render(
+      <Layout path="/" pageContext={{ layout: "homepage" }}>
+        <p>This is a paragraph.</p>
+      </Layout>
+    );
+
+    await waitFor(() => {
+      const decommissionBannerHeading = getByRole("region", { name: /decommission warning/i});
+      expect(decommissionBannerHeading).toBeInTheDocument();
+    });
+  });
+
   it("does not display back to search link", async () => {
     const { queryByRole } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>

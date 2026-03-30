@@ -113,4 +113,55 @@ describe("General layout", () => {
       expect(backToSearchLink.getAttribute("href")).toBe("/");
     });
   });
+
+    it("displays the decommission warning banner on the cookies policy page", async () => {
+      const { getByRole } = render(
+        <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
+          <p>This is a paragraph.</p>
+        </Layout>
+      );
+
+      await waitFor(() => {
+        const decommissionBannerHeading = getByRole("region", {
+          name: /decommission warning/i,
+        });
+        expect(decommissionBannerHeading).toBeInTheDocument();
+      });
+    });
+
+    it("displays the decommission warning banner on the accessibility statement page", async () => {
+      const { getByRole } = render(
+        <Layout
+          path="/accessibility-statement/"
+          pageContext={{ layout: "general" }}
+        >
+          <p>This is a paragraph.</p>
+        </Layout>
+      );
+
+      await waitFor(() => {
+        const decommissionBannerHeading = getByRole("region", {
+          name: /decommission warning/i,
+        });
+        expect(decommissionBannerHeading).toBeInTheDocument();
+      });
+    });
+
+    it("displays the decommission warning banner on a practices details page", async () => {
+      const { getByRole } = render(
+        <Layout
+          path="/practice/A12345/integration-times/"
+          pageContext={{ layout: "general" }}
+        >
+          <p>This is a paragraph.</p>
+        </Layout>
+      );
+
+      await waitFor(() => {
+        const decommissionBannerHeading = getByRole("region", {
+          name: /decommission warning/i,
+        });
+        expect(decommissionBannerHeading).toBeInTheDocument();
+      });
+    });
 });

@@ -1,0 +1,32 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+@import "node_modules/nhsuk-frontend/packages/components/header/header";
+@import "node_modules/nhsuk-frontend/packages/components/card/card";
+
+
+.decommission-notification {
+  border: 5px solid #005eb8;
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  .nhsuk-card__header--care {
+    background-color: #005eb8;
+    padding: 8px 16px;
+  }
+
+  .nhsuk-card__title--care {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .nhsuk-card__content {
+    background-color: #ffffff;
+    padding: 16px;
+
+    .nhsuk-body {
+       font-weight: 700;
+       font-size: 1.125rem;
+    }
+  }
+}

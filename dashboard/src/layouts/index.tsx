@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
 
 import { CookieBanner } from "../components/CookieBanner";
+import { DecommissionBanner } from "../components/DecommissionBanner";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ErrorBoundary } from "../components/ErrorBoundary";
@@ -36,18 +37,16 @@ type ContentProps = {
 };
 
 const HomepageContent: FC<ContentProps> = ({ children }) => (
-  <>
-    {/*keeping consistent with nhs.uk and their styling on the home page with the hero banner*/}
-    <main className="nhsuk-main-wrapper app-homepage" id="maincontent">
-      <HeroBanner
-        title={homepageContent.title}
-        subtitle={homepageContent.subtitle}
-      />
-      <section className="app-homepage-content">
-        <div className="gp2gp-width-container">{children}</div>
-      </section>
-    </main>
-  </>
+  <main className="nhsuk-main-wrapper app-homepage" id="maincontent">
+    <HeroBanner
+      title={homepageContent.title}
+      subtitle={homepageContent.subtitle}
+    />
+    <DecommissionBanner />
+    <section className="app-homepage-content">
+      <div className="gp2gp-width-container">{children}</div>
+    </section>
+  </main>
 );
 
 const BackToLink = ({ text, link }: { text: string; link: string }) => (
@@ -89,6 +88,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
+  const persistentWarning = <DecommissionBanner />;
 
   const { toggles } = useFetchFeatureToggles();
 
@@ -113,11 +113,14 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
           {!isOnCookiePage && <CookieBanner path={path} />}
           <SkipLink />
           <Header />
+          {pageContext.layout !== "homepage" && persistentWarning}
           {pageContext.layout === "homepage" ? (
-            <HomepageContent>{children}</HomepageContent>
-          ) :
+            <HomepageContent>
+              {children}
+            </HomepageContent>
+          ) : (
             <GeneralContent>{children}</GeneralContent>
-          }
+          )}
           <Footer />
         </ErrorBoundary>
       </FeatureTogglesContext.Provider>
