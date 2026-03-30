@@ -10,6 +10,7 @@ setup(
         "requests>=2.2",
         "boto3>=1.29.7",
         "urllib3==2.6.3",
+        "setuptools==80.10.2",
     ],
     entry_points={
         "console_scripts": [

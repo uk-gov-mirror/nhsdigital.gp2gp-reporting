@@ -11,7 +11,7 @@ COPY setup.py .
 ARG IMAGE_TAG
 ENV BUILD_TAG=${IMAGE_TAG}
 
-RUN pip install --upgrade pip setuptools wheel && \
+RUN pip install --upgrade pip setuptools==80.10.2 wheel && \
     pip install .
 
 ENTRYPOINT ["python", "-m", "prmexporter.main"]

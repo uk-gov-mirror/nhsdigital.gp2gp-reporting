@@ -11,5 +11,6 @@ setup(
         "urllib3==2.6.3",
         "PyArrow==23.0.0",
         "polars~=0.20.31",
+        "setuptools==80.10.2",
     ],
 )

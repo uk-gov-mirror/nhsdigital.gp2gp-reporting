@@ -10,5 +10,6 @@ setup(
         "boto3>=1.18",
         "PyArrow==23.0.0",
         "urllib3==2.6.3",
+        "setuptools==80.10.2",
     ],
 )
